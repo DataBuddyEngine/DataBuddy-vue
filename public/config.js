@@ -6,6 +6,7 @@ window.$website = {
     subName: '你的数据可视化引擎',
     apiUrl: 'https://databuddy.nyamiao.com/api/databuddy',
     cdnUrl: '',
+    backgroundImg: '/img/background.webp',
     autoSave: false,
     autoSaveTime: 60000,
 }

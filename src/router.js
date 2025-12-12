@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { createApp, h } from 'vue'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
@@ -14,26 +15,27 @@ const style = document.createElement('style')
 style.innerHTML = `
   #nprogress .bar {
     background: #f472b6 !important;
-    height: 2px !important;
+    height: 3px !important;
     box-shadow: 0 0 5px rgba(244, 114, 182, 0.7) !important;
   }
   #nprogress .peg {
     box-shadow: 0 0 15px #f472b6, 0 0 10px #f472b6 !important;
     opacity: 1 !important;
   }
-  #nprogress .spinner {
-    display: none !important;
-  }
 `
 document.head.appendChild(style)
+
+let loadingApp = null;
+let loadingNode = null;
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/' || '/index.html',
       name: 'index',
       component: () => import('./views/Index.vue'),
+      meta: { requiresIndexLoading: true },
     },
     {
       path: '/:pathMatch(.*)*',
@@ -43,13 +45,55 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
-  NProgress.start()
-  next()
-})
+router.beforeEach(async (to, from, next) => {
+  if (!to.meta.requiresIndexLoading) {
+    NProgress.start()
+  }
 
-router.afterEach(() => {
-  NProgress.done()
-})
+  if (to.meta.requiresIndexLoading) {
+    NProgress.done()
+    NProgress.remove()
+    loadingNode = document.createElement('div');
+    loadingNode.id = 'custom-loading';
+    document.body.appendChild(loadingNode);
+
+    try {
+      const LoadingComponent = (await import('@/components/index/Loading.vue')).default;
+
+      loadingApp = createApp({
+        render: () => h(LoadingComponent)
+      });
+
+      loadingApp.mount(loadingNode);
+    } catch (error) {
+      console.error('Failed to load custom loading component:', error);
+      NProgress.start();
+      document.body.removeChild(loadingNode);
+      loadingNode = null;
+    }
+  }
+
+  next();
+});
+
+router.afterEach((to) => {
+  if (to.meta.requiresIndexLoading && loadingApp) {
+    setTimeout(() => {
+      if (loadingApp) {
+        loadingApp.unmount();
+        loadingApp = null;
+      }
+
+      if (loadingNode && document.body.contains(loadingNode)) {
+        document.body.removeChild(loadingNode);
+        loadingNode = null;
+      }
+    }, 300);
+  }
+
+  if (!to.meta.requiresIndexLoading && NProgress.isStarted()) {
+    NProgress.done();
+  }
+});
 
 export default router
