@@ -4,10 +4,8 @@ window.$website = {
     title: 'DataBuddy 数据大屏',
     name: 'DataBuddy 数据大屏',
     subName: '你的数据可视化引擎',
-    url: 'https://databuddy.nyamiao.com/api/databuddy',
-    routers: {
-        mainPath: '/'
-    },
+    apiUrl: 'https://databuddy.nyamiao.com/api/databuddy',
+    cdnUrl: '',
     autoSave: false,
     autoSaveTime: 60000,
 }
