@@ -54,8 +54,13 @@ onMounted(() => {
         height: 80%;
         border-radius: 20px;
         backdrop-filter: blur(3px);
-        background-color: rgba(255, 255, 255, 0.2);
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px) saturate(180%);
+        -webkit-backdrop-filter: blur(10px) saturate(180%);
+        border: 1px solid rgba(255,255,255,0.4);
+        box-shadow:
+            0 8px 32px rgba(0,0,0,0.2),
+            inset 0 4px 20px rgba(255,255,255,0.3);
         display: flex;
         flex-direction: column;
         justify-content: center;

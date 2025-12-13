@@ -21,6 +21,7 @@ onMounted(() => {
         height: 100vh;
         width: 100vw;
         background-color: #fff;
+        z-index: 9999;
     }
     .title {
         position: fixed;

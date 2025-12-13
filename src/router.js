@@ -32,15 +32,60 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/' || '/index.html',
-      name: 'index',
-      component: () => import('./views/Index.vue'),
-      meta: { requiresIndexLoading: true },
+      path: '/',
+      name: 'Index',
+      component: () => import('./views/Loading.vue'),
+      meta: { requiresIndexLoading: true }
+    },
+    {
+      path: '/datascreen',
+      name: 'Datascreen',
+      component: () => import('./views/Index.vue')
+    },
+    {
+      path: '/category',
+      name: 'Category',
+      component: () => import('./views/Index.vue')
+    },
+    {
+      path: '/datasource',
+      name: 'Datasource',
+      component: () => import('./views/Index.vue')
+    },
+    {
+      path: '/record',
+      name: 'Record',
+      component: () => import('./views/Index.vue')
+    },
+    {
+      path: '/components',
+      name: 'Components',
+      component: () => import('./views/Index.vue')
+    },
+    {
+      path: '/variables',
+      name: 'Variables',
+      component: () => import('./views/Index.vue')
+    },
+    {
+      path: '/files',
+      name: 'Files',
+      component: () => import('./views/Index.vue')
+    },
+    {
+      path: '/maps',
+      name: 'Maps',
+      component: () => import('./views/Index.vue')
+    },
+    {
+      path: '/tools',
+      name: 'Tools',
+      component: () => import('./views/Index.vue')
     },
     {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
-      component: () => import('./views/NotFound.vue'),
+      component: () => import('./views/NotFound.vue')
     },
   ],
 })
@@ -48,22 +93,19 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   if (!to.meta.requiresIndexLoading) {
     NProgress.start()
-  }
-
-  if (to.meta.requiresIndexLoading) {
+  } else {
     NProgress.done()
     NProgress.remove()
+
     loadingNode = document.createElement('div');
     loadingNode.id = 'custom-loading';
     document.body.appendChild(loadingNode);
 
     try {
       const LoadingComponent = (await import('@/components/index/Loading.vue')).default;
-
       loadingApp = createApp({
         render: () => h(LoadingComponent)
       });
-
       loadingApp.mount(loadingNode);
     } catch (error) {
       console.error('Failed to load custom loading component:', error);
@@ -88,7 +130,7 @@ router.afterEach((to) => {
         document.body.removeChild(loadingNode);
         loadingNode = null;
       }
-    }, 300);
+    }, 3000);
   }
 
   if (!to.meta.requiresIndexLoading && NProgress.isStarted()) {
