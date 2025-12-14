@@ -16,16 +16,16 @@ onMounted(() => {
   document.body.style.background = "url('"+config.backgroundImg+"') no-repeat center center fixed"
   document.body.style.backgroundSize = "cover"
 
-  const linkElement = document.createElement('link');
-  linkElement.rel = 'stylesheet';
+  //const linkElement = document.createElement('link');
+  //linkElement.rel = 'stylesheet';
 
-  if (config.cdnUrl && config.cdnUrl !== "") {
-    linkElement.href = `${config.cdnUrl}/assets/font-awesome/css/all.min.css`;
-  } else {
-    linkElement.href = '@/assets/font-awesome/css/all.min.css';
-  }
+  //if (config.cdnUrl && config.cdnUrl !== "") {
+    //linkElement.href = `${config.cdnUrl}/assets/font-awesome/css/all.min.css`;
+  //} else {
+    //linkElement.href = '@/assets/font-awesome/css/all.min.css';
+  //}
 
-  document.head.appendChild(linkElement);
+  //document.head.appendChild(linkElement);
 })
 </script>
 <template>
