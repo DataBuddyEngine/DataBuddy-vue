@@ -5,7 +5,7 @@ const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'
 <template>
   <header class="header">
     <div class="header-left">
-      <button class="header-button create-variables"><i class="fa-solid fa-plus"></i> 创建变量</button>
+      <button class="header-button create-variables"><i class="fa-solid fa-square-root-variable"></i> 创建变量</button>
     </div>
     <div class="header-right">
       <input type="text" placeholder="请输入名称" class="header-search"></input>

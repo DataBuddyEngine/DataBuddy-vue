@@ -27,7 +27,7 @@
 <template>
     <div class="leftbar">
         <button class="leftbar-item" :class="{ 'activated': activeMenu === '/datascreen' }" @click="handleMenuClick('/datascreen')"><i class="fa-solid fa-table-cells-large"></i> 大屏管理</button>
-        <button class="leftbar-item" :class="{ 'activated': activeMenu === '/category' }" @click="handleMenuClick('/category')"><i class="fa-solid fa-folder"></i> 大屏分类</button>
+        <button class="leftbar-item" :class="{ 'activated': activeMenu === '/category' }" @click="handleMenuClick('/category')"><i class="fa-solid fa-folder-open"></i> 大屏分类</button>
         <button class="leftbar-item" :class="{ 'activated': activeMenu === '/datasource' }" @click="handleMenuClick('/datasource')"><i class="fa-solid fa-database"></i> 数据源管理</button>
         <button class="leftbar-item" :class="{ 'activated': activeMenu === '/record' }" @click="handleMenuClick('/record')"><i class="fa-solid fa-suitcase"></i> 数据集管理</button>
         <button class="leftbar-item" :class="{ 'activated': activeMenu === '/components' }" @click="handleMenuClick('/components')"><el-icon style="font-size:20px;transform: translateY(4px);"><Eleme /></el-icon> 组件库</button>
