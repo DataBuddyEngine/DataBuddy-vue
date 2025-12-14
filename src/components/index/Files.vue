@@ -5,8 +5,7 @@ const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'
 <template>
   <header class="header">
     <div class="header-left">
-      <button class="header-button create-datascreen"><i class="fa-solid fa-plus"></i> 创建大屏</button>
-      <button class="header-button import-datascreen"><i class="fa-solid fa-file-import"></i> 导入大屏</button>
+      <button class="header-button create-files"><i class="fa-solid fa-upload"></i> 上传文件</button>
     </div>
     <div class="header-right">
       <input type="text" placeholder="请输入名称" class="header-search"></input>
@@ -16,24 +15,14 @@ const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'
   <Nodata />
 </template>
 <style>
-  .create-datascreen {
+  .create-files {
     color: #fff;
     background-color: #00b7ff;
   }
-  .create-datascreen:hover {
+  .create-files:hover {
     background-color: #00a2e2;
   }
-  .create-datascreen:active {
+  .create-files:active {
     background-color: #0088c3;
-  }
-  .import-datascreen {
-    color: #fff;
-    background-color: #f472b6;
-  }
-  .import-datascreen:hover {
-    background-color: #e267a7;
-  }
-  .import-datascreen:active {
-    background-color: #c35b99;
   }
 </style>

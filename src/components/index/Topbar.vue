@@ -25,11 +25,11 @@ onUnmounted(() => {
 </script>
 <template>
     <div class="topbar">
-        <div class="logo" @click="router.push('/')">
+        <div class="logo">
             <img src="@/assets/logo.svg" alt="logo" />
         </div>
         <div class="topbar-left">
-            <button @click="router.push('/')">{{ config.title }}</button>
+            <button>{{ config.title }}</button>
         </div>
         <div class="topbar-right">
             <div id="time"></div>
@@ -50,7 +50,7 @@ onUnmounted(() => {
     }
     .logo {
         position: fixed;
-        top: 6px;
+        top: 8px;
         left: 10px;
     }
     .logo img {
@@ -60,7 +60,7 @@ onUnmounted(() => {
     .topbar-left,
     .topbar-right {
         position: fixed;
-        top: 3px;
+        top: 5px;
         font-size: 16px;
         color: #fff;
         text-shadow: 1px 1px 4px rgba(0,0,0,0.4);

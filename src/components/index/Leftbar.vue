@@ -69,6 +69,7 @@
         cursor: pointer;
         font-size: 16px;
         color: #333;
+        text-shadow: 1px 1px 4px rgba(255,255,255,0.4);
     }
     .leftbar-item:hover {
         background-color: rgba(255,255,255,0.2);

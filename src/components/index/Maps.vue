@@ -5,8 +5,8 @@ const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'
 <template>
   <header class="header">
     <div class="header-left">
-      <button class="header-button create-datascreen"><i class="fa-solid fa-plus"></i> 创建大屏</button>
-      <button class="header-button import-datascreen"><i class="fa-solid fa-file-import"></i> 导入大屏</button>
+      <button class="header-button create-maps"><i class="fa-solid fa-location-dot"></i> 创建地图</button>
+      <button class="header-button download-maps"><i class="fa-solid fa-download"></i> 地图下载</button>
     </div>
     <div class="header-right">
       <input type="text" placeholder="请输入名称" class="header-search"></input>
@@ -16,24 +16,24 @@ const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'
   <Nodata />
 </template>
 <style>
-  .create-datascreen {
+  .create-maps {
     color: #fff;
     background-color: #00b7ff;
   }
-  .create-datascreen:hover {
+  .create-maps:hover {
     background-color: #00a2e2;
   }
-  .create-datascreen:active {
+  .create-maps:active {
     background-color: #0088c3;
   }
-  .import-datascreen {
+  .download-maps {
     color: #fff;
     background-color: #f472b6;
   }
-  .import-datascreen:hover {
+  .download-maps:hover {
     background-color: #e267a7;
   }
-  .import-datascreen:active {
+  .download-maps:active {
     background-color: #c35b99;
   }
 </style>
