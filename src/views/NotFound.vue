@@ -44,7 +44,7 @@ onMounted(() => {
         </div>
     </div>
 </template>
-<style>
+<style scoped>
     .container {
         position: fixed;
         top: 50%;

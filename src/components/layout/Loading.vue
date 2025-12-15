@@ -2,7 +2,17 @@
 import { onMounted } from 'vue'
 
 onMounted(() => {
-  document.title = 'Loading...'
+    document.title = 'Loading...'
+    const loadingScreen = document.querySelector('.loading');
+    setTimeout(() => {
+        loadingScreen.classList.add('active');
+    }, 100);
+    setTimeout(() => {
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 500);
+    }, 2400);
 })
 </script>
 <template>
@@ -21,7 +31,17 @@ onMounted(() => {
         height: 100vh;
         width: 100vw;
         background-color: #fff;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        -webkit-font-smoothing: antialiased;
         z-index: 9999;
+    }
+    .loading.active {
+        opacity: 1;
+    }
+    .loading.fade-out {
+        opacity: 0;
+        pointer-events: none;
     }
     .title {
         position: fixed;

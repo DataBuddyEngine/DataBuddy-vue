@@ -26,13 +26,18 @@
                 return defineAsyncComponent(() => import('@/components/index/Tools.vue'))
         }
     })
+
+    const emit = defineEmits(['show-modal'])
+    const handleShowModal = (payload) => {
+        emit('show-modal', payload)
+    }
 </script>
 <template>
     <div class="container">
-        <component :is="DynamicContent" />
+        <component :is="DynamicContent" @show-modal="handleShowModal" />
     </div>
 </template>
-<style>
+<style scoped>
     .container {
         position: fixed;
         top: 38px;
@@ -49,17 +54,19 @@
             inset 0 4px 20px rgba(255,255,255,0.3);
         z-index: 1;
     }
-    .header-left {
+    :deep(.header-left) {
         position: absolute;
         top: 15px;
         left: 15px;
     }
-    .header-right {
+    
+    :deep(.header-right) {
         position: absolute;
         top: 15px;
         right: 15px;
     }
-    .header-button {
+    
+    :deep(.header-button) {
         width: 128px;
         height: 32px;
         font-size: 15px;
@@ -68,44 +75,51 @@
         margin: 0 4px;
         cursor: pointer;
     }
-    .header-button:first-child {
+
+    :deep(.header-button:first-child) {
         margin-left: 0;
     }
-    .header-button:last-child {
+
+    :deep(.header-button:last-child) {
         margin-right: 0;
     }
-    .search-button:hover {
-        background-color: #e267a7;
-    }
-    .search-button:active {
-        background-color: #c35b99;
-    }
-    .header-search {
+
+    :deep(.header-search) {
         width: 150px;
         height: 32px;
         font-size: 15px;
         border: none;
         border-radius: 10px;
         padding: 0 10px;
-        background-color: rgba(255,255,255,0.3);
+        background-color: rgba(255, 255, 255, 0.3);
+        transition: background-color 0.2s ease;
     }
-    .header-search:hover {
-        background-color: rgba(255,255,255,0.4);
+
+    :deep(.header-search:hover) {
+        background-color: rgba(255, 255, 255, 0.4);
     }
-    .header-search:focus {
+
+    :deep(.header-search:focus) {
         outline: none;
-        background-color: rgba(255,255,255,0.5);
+        background-color: rgba(255, 255, 255, 0.5);
     }
-    .search-button {
+    
+    :deep(.search-button) {
         width: 32px;
         height: 32px;
         background-color: #f472b6;
         color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
     }
-    .search-button:hover {
+    
+    :deep(.search-button:hover) {
         background-color: #e267a7;
     }
-    .search-button:active {
+
+    :deep(.search-button:active) {
         background-color: #c35b99;
     }
 </style>

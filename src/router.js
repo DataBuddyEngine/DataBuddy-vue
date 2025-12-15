@@ -6,13 +6,20 @@ import 'nprogress/nprogress.css'
 NProgress.configure({
   easing: 'ease',
   speed: 500,
-  showSpinner: false,
+  showSpinner: true,
   trickleSpeed: 200,
   minimum: 0.3
 })
 
 const style = document.createElement('style')
 style.innerHTML = `
+  #nprogress {
+    z-index: 9999 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
   #nprogress .bar {
     background: #f472b6 !important;
     height: 3px !important;
@@ -21,6 +28,10 @@ style.innerHTML = `
   #nprogress .peg {
     box-shadow: 0 0 15px #f472b6, 0 0 10px #f472b6 !important;
     opacity: 1 !important;
+  }
+  #nprogress .spinner-icon {
+    border-top-color: #f472b6 !important;
+    border-left-color: #f472b6 !important;
   }
 `
 document.head.appendChild(style)
@@ -102,7 +113,7 @@ router.beforeEach(async (to, from, next) => {
     document.body.appendChild(loadingNode);
 
     try {
-      const LoadingComponent = (await import('@/components/index/Loading.vue')).default;
+      const LoadingComponent = (await import('@/components/layout/Loading.vue')).default;
       loadingApp = createApp({
         render: () => h(LoadingComponent)
       });

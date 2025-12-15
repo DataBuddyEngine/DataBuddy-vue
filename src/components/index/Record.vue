@@ -1,11 +1,20 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'))
+
+const emit = defineEmits(['show-modal'])
+const handleCreate = () => {
+  emit('show-modal', {
+    title: '创建数据集',
+    content: '开发中...',
+    theme: 'light'
+  })
+}
 </script>
 <template>
   <header class="header">
     <div class="header-left">
-      <button class="header-button create-record"><i class="fa-solid fa-file-circle-plus"></i> 创建数据集</button>
+      <button class="header-button create-record" @click="handleCreate"><i class="fa-solid fa-file-circle-plus"></i> 创建数据集</button>
     </div>
     <div class="header-right">
       <input type="text" placeholder="请输入名称" class="header-search"></input>
@@ -14,10 +23,11 @@ const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'
   </header>
   <Nodata />
 </template>
-<style>
+<style scoped>
   .create-record {
     color: #fff;
     background-color: #00b7ff;
+    transition: background-color 0.2s ease;
   }
   .create-record:hover {
     background-color: #00a2e2;

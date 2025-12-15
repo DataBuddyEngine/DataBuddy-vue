@@ -1,3 +1,6 @@
+<script setup>
+    const emit = defineEmits(['show-modal'])
+</script>
 <template>
     <div class="tools-item">
         <h2>大屏轮播</h2>
@@ -10,7 +13,7 @@
         <button class="tools-item-btn">预览大屏</button>
     </div>
 </template>
-<style>
+<style scoped>
     .tools-item {
         margin-left: 20px;
         color: #333;
@@ -25,6 +28,7 @@
         border: none;
         border-radius: 10px;
         background-color: rgba(255,255,255,0.3);
+        transition: background-color 0.2s ease;
     }
     .tools-item-input:hover {
         background-color: rgba(255,255,255,0.4);
@@ -43,6 +47,7 @@
         background-color: rgba(255,255,255,0.3);
         color: #333;
         cursor: pointer;
+        transition: background-color 0.2s ease;
     }
     .tools-item-btn:hover {
         background-color: rgba(255,255,255,0.4);

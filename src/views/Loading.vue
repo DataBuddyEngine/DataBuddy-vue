@@ -17,3 +17,4 @@ onUnmounted(() => {
   }
 })
 </script>
+<template></template>

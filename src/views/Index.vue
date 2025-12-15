@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, defineAsyncComponent } from 'vue'
+import { onMounted, defineAsyncComponent, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import getConfig from '@/utils/config'
 
@@ -27,9 +27,35 @@ onMounted(() => {
 
   //document.head.appendChild(linkElement);
 })
+
+const Modal = defineAsyncComponent(() => import('@/components/layout/Modal.vue'))
+
+const showModal = ref(false)
+const modalContent = ref('')
+const modalTheme = ref('light')
+const modalTitle = ref('')
+const modalWidth = ref('auto')
+const modalHeight = ref('auto')
+
+const handleShowModal = (payload) => {
+  modalContent.value = payload.content || ''
+  modalTheme.value = ['light', 'dark'].includes(payload.theme) ? payload.theme : 'light'
+  modalTitle.value = payload.title || ''
+  showModal.value = true
+  modalWidth.value = payload.width || 'auto'
+  modalHeight.value = payload.height || 'auto'
+}
+
+const closeModal = () => {
+  showModal.value = false
+}
 </script>
 <template>
   <Topbar />
   <Leftbar />
-  <Main />
+  <Main @show-modal="handleShowModal" />
+  
+  <Modal v-if="showModal" @close="closeModal" :theme="modalTheme" :title="modalTitle" :width="modalWidth" :height="modalHeight">
+    {{ modalContent }}
+  </Modal>
 </template>

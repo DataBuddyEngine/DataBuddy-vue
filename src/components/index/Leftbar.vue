@@ -37,7 +37,7 @@
         <button class="leftbar-item" :class="{ 'activated': activeMenu === '/tools' }" @click="handleMenuClick('/tools')"><i class="fa-solid fa-boxes-stacked"></i> 工具箱</button>
     </div>
 </template>
-<style>
+<style scoped>
     .leftbar {
         position: fixed;
         top: 38px;
@@ -70,6 +70,7 @@
         font-size: 16px;
         color: #333;
         text-shadow: 1px 1px 4px rgba(255,255,255,0.4);
+        transition: background-color 0.2s ease;
     }
     .leftbar-item:hover {
         background-color: rgba(255,255,255,0.2);

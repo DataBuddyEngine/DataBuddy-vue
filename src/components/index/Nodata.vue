@@ -6,7 +6,7 @@
     </div>
   </main>
 </template>
-<style>
+<style scoped>
     .main {
         height: calc(100vh - 62px);
         padding-top: 62px;

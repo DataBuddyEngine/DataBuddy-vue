@@ -36,7 +36,7 @@ onUnmounted(() => {
         </div>
     </div>
 </template>
-<style>
+<style scoped>
     .topbar {
         position: fixed;
         top: 0;
