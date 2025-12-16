@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'maximize'])
 
 const props = defineProps({
   theme: {
@@ -158,6 +158,9 @@ const getDimensionValue = (value, dimension) => {
 }
 .modal-container.maximized .modal-maximize-btn::before {
   content: "\f422";
+}
+.modal-container.maximized {
+  border-radius: 0 !important;
 }
 .modal-header-buttons:hover .modal-close-btn::before,
 .modal-header-buttons:hover .modal-maximize-btn::before {
