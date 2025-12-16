@@ -1,7 +1,7 @@
 <script setup>
     import { defineAsyncComponent, computed } from 'vue'
     import { useRoute } from 'vue-router'
-    
+
     const route = useRoute()
     const DynamicContent = computed(() => {
         switch (route.path) {
