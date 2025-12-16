@@ -1,5 +1,5 @@
 <script setup>
-import { defineEmits, ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 
 const emit = defineEmits(['close-modal', 'confirm-create', 'show-tip'])
 
