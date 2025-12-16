@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 const emit = defineEmits(['close', 'maximize'])
 
 const props = defineProps({
@@ -32,11 +32,22 @@ const props = defineProps({
 })
 
 const isMaximized = ref(false)
+const modalContainer = ref(null)
 
 const closeModal = () => emit('close')
-const toggleMaximize = () => {
+const toggleMaximize = async () => {
+  if (!isMaximized.value && modalContainer.value) {
+    const rect = modalContainer.value.getBoundingClientRect();
+    modalContainer.value.dataset.startX = rect.left;
+    modalContainer.value.dataset.startY = rect.top;
+    modalContainer.value.dataset.startWidth = rect.width;
+    modalContainer.value.dataset.startHeight = rect.height;
+  }
+
   isMaximized.value = !isMaximized.value
   emit('maximize', isMaximized.value)
+
+  await nextTick();
 }
 const getDimensionValue = (value, dimension) => {
   if (isMaximized.value) {
@@ -51,7 +62,7 @@ const getDimensionValue = (value, dimension) => {
 </script>
 <template>
   <div class="modal-mask">
-    <div class="modal-container" :class="[theme, { 'maximized': isMaximized }]" :style="{ width: getDimensionValue(width), height: getDimensionValue(height), maxWidth: isMaximized ? '100vw' : 'none', maxHeight: isMaximized ? '100vh' : 'none'}">
+    <div ref="modalContainer" class="modal-container" :class="[theme, { 'maximized': isMaximized, 'animating': true }]" :style="{ width: getDimensionValue(width), height: getDimensionValue(height), maxWidth: isMaximized ? '100vw' : 'none', maxHeight: isMaximized ? '100vh' : 'none'}">
       <header class="modal-header">
         <div class="modal-header-buttons">
           <button class="modal-close-btn" @click="closeModal"></button>
@@ -86,6 +97,11 @@ const getDimensionValue = (value, dimension) => {
   overflow: hidden;
   position: relative;
   z-index: 99999;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: center center;
+}
+.modal-container.animating {
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .modal-container.light {
   background-color: #fff;
