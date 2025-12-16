@@ -27,14 +27,18 @@
         }
     })
 
-    const emit = defineEmits(['show-modal'])
+    const emit = defineEmits(['show-modal', 'show-tip'])
     const handleShowModal = (payload) => {
         emit('show-modal', payload)
+    }
+
+    const handleShowTip = (payload) => {
+        emit('show-tip', payload)
     }
 </script>
 <template>
     <div class="container">
-        <component :is="DynamicContent" @show-modal="handleShowModal" />
+        <component :is="DynamicContent" @show-modal="handleShowModal" @show-tip="handleShowTip" />
     </div>
 </template>
 <style scoped>

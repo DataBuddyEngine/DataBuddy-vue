@@ -1,6 +1,7 @@
 <script setup>
 import { defineAsyncComponent, ref } from 'vue'
 const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'))
+const Create = defineAsyncComponent(() => import('@/components/index/modal/components/Create.vue'))
 
 const activeTab = ref('all')
 
@@ -17,12 +18,17 @@ const handleTabClick = (tabName) => {
   // }
 }
 
-const emit = defineEmits(['show-modal'])
+const emit = defineEmits(['show-modal', 'show-tip'])
 const handleCreate = () => {
   emit('show-modal', {
     title: '创建组件',
-    content: '开发中...',
-    theme: 'light'
+    content: Create,
+    theme: 'light',
+    height: '80%',
+    width: '60%',
+    events: {
+      'show-tip': (payload) => emit('show-tip', payload)
+    }
   })
 }
 </script>
@@ -57,9 +63,13 @@ const handleCreate = () => {
     background-color: #0088c3;
   }
   .header-components-list {
-    position: absolute;
-    top: 58px;
-    left: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 0;
+    margin-top: 58px;
+    padding-left: 15px;
+    width: 100%;
+    box-sizing: border-box;
   }
   .header-components-item {
     background-color: rgba(255,255,255,0.05);

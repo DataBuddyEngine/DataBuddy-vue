@@ -70,10 +70,8 @@ const getDimensionValue = (value) => {
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   min-width: 200px;
-  min-height: 80px;
-  max-width: 85%;
-  max-height: 85%;
-  overflow: auto;
+  min-height: 60px;
+  overflow: hidden;
   position: relative;
   z-index: 99999;
 }
@@ -139,6 +137,6 @@ const getDimensionValue = (value) => {
   text-align: center;
 }
 .modal-main {
-  padding: 10px;
+  padding: 4px;
 }
 </style>

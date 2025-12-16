@@ -1,20 +1,25 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'))
+const Create = defineAsyncComponent(() => import('@/components/index/modal/maps/Create.vue'))
 
-const emit = defineEmits(['show-modal'])
+const emit = defineEmits(['show-modal', 'show-tip'])
 const handleCreate = () => {
   emit('show-modal', {
     title: '创建地图',
-    content: '开发中...',
-    theme: 'light'
+    content: Create,
+    theme: 'light',
+    width: '40%',
+    height: '60%',
+    events: {
+      'show-tip': (payload) => emit('show-tip', payload)
+    }
   })
 }
-const handleDownload = () => {
-  emit('show-modal', {
-    title: '下载地图',
-    content: '开发中...',
-    theme: 'light'
+const devTips = () => {
+  emit('show-tip', {
+    content: '功能开发中...',
+    theme: 'info'
   })
 }
 </script>
@@ -22,7 +27,7 @@ const handleDownload = () => {
   <header class="header">
     <div class="header-left">
       <button class="header-button create-maps" @click="handleCreate"><i class="fa-solid fa-location-dot"></i> 创建地图</button>
-      <button class="header-button download-maps" @click="handleDownload"><i class="fa-solid fa-download"></i> 地图下载</button>
+      <button class="header-button download-maps" @click="devTips"><i class="fa-solid fa-download"></i> 地图下载</button>
     </div>
     <div class="header-right">
       <input type="text" placeholder="请输入名称" class="header-search"></input>

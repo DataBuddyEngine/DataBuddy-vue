@@ -1,10 +1,8 @@
 <script setup>
-import { onMounted, defineAsyncComponent, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { onMounted, defineAsyncComponent, shallowRef } from 'vue'
 import getConfig from '@/utils/config'
+import Tip from '@/components/layout/Tip.vue'
 
-const route = useRoute()
-const router = useRouter()
 const config = getConfig()
 
 const Topbar = defineAsyncComponent(() => import('@/components/index/Topbar.vue'))
@@ -30,15 +28,15 @@ onMounted(() => {
 
 const Modal = defineAsyncComponent(() => import('@/components/layout/Modal.vue'))
 
-const showModal = ref(false)
-const modalContent = ref('')
-const modalTheme = ref('light')
-const modalTitle = ref('')
-const modalWidth = ref('auto')
-const modalHeight = ref('auto')
+const showModal = shallowRef(false)
+const modalContent = shallowRef('')
+const modalTheme = shallowRef('light')
+const modalTitle = shallowRef('')
+const modalWidth = shallowRef('auto')
+const modalHeight = shallowRef('auto')
 
 const handleShowModal = (payload) => {
-  modalContent.value = payload.content || ''
+  modalContent.value = payload.content || null
   modalTheme.value = ['light', 'dark'].includes(payload.theme) ? payload.theme : 'light'
   modalTitle.value = payload.title || ''
   showModal.value = true
@@ -49,13 +47,41 @@ const handleShowModal = (payload) => {
 const closeModal = () => {
   showModal.value = false
 }
+
+const tip = shallowRef(null)
+
+const handleShowTip = (payload) => {
+  if (!tip.value) return;
+  
+  const { content, theme = 'success', duration = 3000 } = payload;
+  
+  switch(theme) {
+    case 'success':
+      tip.value.success(content, duration);
+      break;
+    case 'error':
+      tip.value.error(content, duration);
+      break;
+    case 'warning':
+      tip.value.warning(content, duration);
+      break;
+    case 'info':
+      tip.value.info(content, duration);
+      break;
+    default:
+      tip.value.success(content, duration);
+  }
+}
 </script>
 <template>
   <Topbar />
   <Leftbar />
-  <Main @show-modal="handleShowModal" />
+  <Main @show-modal="handleShowModal" @show-tip="handleShowTip" />
   
   <Modal v-if="showModal" @close="closeModal" :theme="modalTheme" :title="modalTitle" :width="modalWidth" :height="modalHeight">
-    {{ modalContent }}
+    <component :is="modalContent" v-if="modalContent && typeof modalContent === 'object'" @close-modal="closeModal" @show-tip="handleShowTip" />
+    <template v-else>{{ modalContent || '无内容' }}</template>
   </Modal>
+
+  <Tip ref="tip" />
 </template>

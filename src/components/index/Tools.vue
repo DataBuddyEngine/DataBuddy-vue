@@ -1,16 +1,23 @@
 <script setup>
-    const emit = defineEmits(['show-modal'])
+    const emit = defineEmits(['show-modal', 'show-tip'])
+
+    const devTips = () => {
+        emit('show-tip', {
+            content: '功能开发中...',
+            theme: 'info'
+        })
+    }
 </script>
 <template>
     <div class="tools-item">
         <h2>大屏轮播</h2>
         <input type="text" placeholder="请输入大屏ID多个用','间隔" class="tools-item-input"></input>
-        <button class="tools-item-btn">预览大屏</button>
+        <button class="tools-item-btn" @click="devTips">预览大屏</button>
     </div>
     <div class="tools-item">
         <h2>HTML 页面</h2>
         <input type="text" placeholder="请输入大屏ID" class="tools-item-input"></input>
-        <button class="tools-item-btn">预览大屏</button>
+        <button class="tools-item-btn" @click="devTips">预览大屏</button>
     </div>
 </template>
 <style scoped>

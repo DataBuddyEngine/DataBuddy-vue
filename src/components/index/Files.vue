@@ -1,12 +1,13 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'))
+const Upload = defineAsyncComponent(() => import('@/components/index/modal/files/Upload.vue'))
 
-const emit = defineEmits(['show-modal'])
+const emit = defineEmits(['show-modal', 'show-tip'])
 const handleCreate = () => {
   emit('show-modal', {
     title: '上传文件',
-    content: '开发中...',
+    content: Upload,
     theme: 'light'
   })
 }

@@ -1,19 +1,26 @@
 <script setup>
-import { defineAsyncComponent, ref } from 'vue'
+import { defineAsyncComponent } from 'vue'
 const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'))
+const Create = defineAsyncComponent(() => import('@/components/index/modal/datascreen/Create.vue'))
+const Import = defineAsyncComponent(() => import('@/components/index/modal/datascreen/Import.vue'))
 
-const emit = defineEmits(['show-modal'])
+const emit = defineEmits(['show-modal', 'show-tip'])
 const handleCreate = () => {
   emit('show-modal', {
     title: '创建大屏',
-    content: '开发中...',
-    theme: 'light'
+    content: Create,
+    theme: 'light',
+    width: '80%',
+    height: '80%',
+    events: {
+      'show-tip': (payload) => emit('show-tip', payload)
+    }
   })
 }
 const handleImport = () => {
   emit('show-modal', {
     title: '导入大屏',
-    content: '开发中...',
+    content: Import,
     theme: 'light'
   })
 }

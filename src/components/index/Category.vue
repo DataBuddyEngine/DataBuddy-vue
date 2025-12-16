@@ -1,14 +1,20 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 const Nodata = defineAsyncComponent(() => import('@/components/index/Nodata.vue'))
+const Create = defineAsyncComponent(() => import('@/components/index/modal/category/Create.vue'))
 
-const emit = defineEmits(['show-modal'])
+const emit = defineEmits(['show-modal', 'show-tip'])
 
 const handleCreate = () => {
   emit('show-modal', {
     title: '创建分类',
-    content: '开发中...',
-    theme: 'light'
+    content: Create,
+    theme: 'light',
+    width: '300px',
+    height: '30%',
+    events: {
+      'show-tip': (payload) => emit('show-tip', payload)
+    }
   })
 }
 </script>
